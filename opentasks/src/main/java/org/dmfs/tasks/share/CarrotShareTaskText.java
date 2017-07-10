@@ -17,9 +17,9 @@
 package org.dmfs.tasks.share;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 
+import org.dmfs.tasks.R;
 import org.dmfs.tasks.model.ContentSet;
 import org.dmfs.tasks.model.Model;
 import org.dmfs.tasks.utils.TaskText;
@@ -35,6 +35,8 @@ import au.com.codeka.carrot.Configuration;
 
 
 /**
+ * {@link TaskText} for sharing task information, uses <code>carrot</code> template engine.
+ *
  * @author Gabor Keszthelyi
  */
 public class CarrotShareTaskText extends AbstractCharSequence implements TaskText
@@ -48,35 +50,19 @@ public class CarrotShareTaskText extends AbstractCharSequence implements TaskTex
             {
                 CarrotEngine engine = new CarrotEngine();
                 Configuration config = engine.getConfig();
-
-//                String s = "file:///android_asset/carrot.template";
-//                String path = "android.resource://" + context.getPackageName() + "/" + R.raw.video;
-//                String path = "android.resource://" + context.getPackageName() + "/";
-
-                Uri fileUri = Uri.parse("android.resource://org.dmfs.tasks/raw/carrot");
-
-//                String path = "file:///android_asset/";
-//                String path = "android.resource://org.dmfs.tasks/raw/";
-//                String fileName = String.valueOf(R.raw.carrot);
-                String fileName = "carrot";
-
-//                config.setResourceLocater(
-//                        new FileResourceLocater(config, path));
-
-                config.setResourceLocater(new CarrotResourceLocator(context));
+                config.setResourceLocater(new RawIdResourceLocator(context));
                 try
                 {
                     Map<String, Object> bindings = new TreeMap<>();
-                    bindings.put("content", "summer day");
-                    String output = engine.process(fileName, bindings);
-                    Log.d("carrot", output);
+                    String templateName = String.valueOf(R.raw.carrot);
+                    String output = engine.process(templateName, bindings);
+                    Log.v("CarrotShareTaskText", output);
                     return output;
                 }
                 catch (CarrotException e)
                 {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException("Failed to process template with carrot", e);
                 }
-
             }
         });
     }

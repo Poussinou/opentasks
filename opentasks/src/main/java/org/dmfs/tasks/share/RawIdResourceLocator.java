@@ -30,14 +30,16 @@ import au.com.codeka.carrot.resource.ResourceName;
 
 
 /**
+ * {@link ResourceLocater} for raw Android resources, uses the id as string.
+ *
  * @author Gabor Keszthelyi
  */
-public final class CarrotResourceLocator implements ResourceLocater
+public final class RawIdResourceLocator implements ResourceLocater
 {
     private final Context mAppContext;
 
 
-    public CarrotResourceLocator(Context context)
+    public RawIdResourceLocator(Context context)
     {
         mAppContext = context.getApplicationContext();
     }
@@ -67,8 +69,7 @@ public final class CarrotResourceLocator implements ResourceLocater
     @Override
     public Reader getReader(ResourceName resourceName) throws CarrotException
     {
-        int rawId = mAppContext.getResources().getIdentifier(resourceName.getName(), "raw", mAppContext.getPackageName());
-        InputStream inputStream = mAppContext.getResources().openRawResource(rawId);
+        InputStream inputStream = mAppContext.getResources().openRawResource(Integer.valueOf(resourceName.getName()));
         return new InputStreamReader(inputStream);
     }
 }
