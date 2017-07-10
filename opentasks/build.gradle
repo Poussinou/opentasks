@@ -40,6 +40,10 @@ android {
         disable 'ManifestResource'
         disable 'ValidFragment'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
@@ -52,5 +56,7 @@ dependencies {
     compile project(':opentasks-provider')
     compile 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     compile 'com.github.dmfs:color-picker:1.0'
+    compile 'com.github.lemonboston:carrot:76991d7e74'
+//    compile 'com.github.codeka:carrot:a91cb40945'
     testCompile 'junit:junit:4.12'
 }

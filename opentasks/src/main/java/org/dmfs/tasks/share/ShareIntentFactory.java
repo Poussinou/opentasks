@@ -47,7 +47,7 @@ public final class ShareIntentFactory implements TaskIntentFactory
     public Intent create(ContentSet contentSet, Model model, Context context)
     {
         String title = new TitleText(contentSet).toString();
-        String body = new ShareTaskText(contentSet, model, context).toString();
+        String body = new CarrotShareTaskText(contentSet, model, context).toString();
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
