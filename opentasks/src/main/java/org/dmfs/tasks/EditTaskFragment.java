@@ -31,7 +31,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -569,7 +569,7 @@ public class EditTaskFragment extends SupportFragment implements LoaderManager.L
             }
 
 			/*
-			 * Don't start the model loader here, let onItemSelected do that.
+             * Don't start the model loader here, let onItemSelected do that.
 			 */
             setListUri(TaskLists.getContentUri(mAuthority), LIST_LOADER_VISIBLE_LISTS_FILTER);
         }
@@ -704,7 +704,7 @@ public class EditTaskFragment extends SupportFragment implements LoaderManager.L
             }
 
             int newColor = getBlendColor(mListColor, darkenColor(mListColor), (int) ((0.5 + 0.5 * percentage) * 255));
-            ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+            ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             actionBar.setBackgroundDrawable(new ColorDrawable(newColor));
 
             // this is a workaround to ensure the new color is applied on all devices, some devices show a transparent ActionBar if we don't do that.
